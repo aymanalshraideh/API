@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   
+</head>
+<body>
+
+<div id="l"><p>Insert</p>
+<form action="test.php" method="post">
+  
+   <label for="">First Name:</label> <br><input type="text" name="fname"><br>
+   <label for="">Last Name:</label><br> <input type="text" name="lname"><br>
+   <label for="">Age:</label><br> <input type="text" name="age"><br>
+    <input type="submit" name="supinsert"  value="Insert"></form>
+
+
+
+
+
+
+<p>Update by ID</p>
+<form action="test.php" method="post">
+    <label for="">ID:</label> <br><input type="text" name="uid"><br>
+    <label for="">First Name:</label> <br><input type="text" name="ufname"><br>
+    <label for="">Last Name:</label><br> <input type="text" name="ulname"><br>
+    <label for="">Age:</label><br> <input type="text" name="uage"><br>
+     <input type="submit" name="supupdate"  value="Update"></form></div>
+    <p>Delete by ID</p>
+<form action="test.php" method="post">
+    <input type="text" name="delete">
+    <input type="submit" name="supdelete"  value="Delete"></form>
+    <h3 id="s"> </h3>
+
+
+
+      <select class="form-control" id="d">
+        <option value="">Select</option>
+    </select>
+    <h1 id="show"></h1>
+
+    <script>
+       
+
+        async function LoadData() {
+            const response = await fetch("test.php");
+            const data = await response.json();
+            for (let index = 0; index < data.length; index++) {
+
+                document.getElementById("s").innerHTML +=data[index].id+ " - "+ data[index].first_name+"  "+ data[index].last_name+"....age "+ data[index].age +"<br>" 
+               
+                document.getElementById("d").innerHTML += "<option>"+data[index].first_name+"</option>"
+
+            }
+          document.getElementById("s").onchange=function(){
+              for(let j=0;j<data.length;j++){
+                  if(data[j].name===document.getElementById("s").value){
+                      document.getElementById("show").innerHTML=data[j].nickname;
+                  }
+              }
+          }
+        }
+        LoadData();
+    </script>
+</body>
+</html>
